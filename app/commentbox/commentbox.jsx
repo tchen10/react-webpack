@@ -2,10 +2,12 @@ import React, { Component, PropTypes } from 'react';
 import UserStore from '../userStore/userStore.jsx';
 import $ from 'jquery';
 
+var url = "https://react-webpack-671a5.firebaseio.com/comments.json";
+
 class CommentBox extends Component {
     loadComments() {
         $.ajax({
-            url: this.props.url,
+            url: url,
             dataType: 'json',
             cache: false,
             success: function(data) {
@@ -17,9 +19,26 @@ class CommentBox extends Component {
         });
     }
 
+    handleCommentSubmit(comment) {
+        $.ajax({
+            url: url,
+            dataType: 'json',
+            type: 'POST',
+            data: comment,
+            success: function(data) {
+                this.setState({data: data});
+            }.bind(this),
+            error: function(xhr, status, err) {
+                console.error(this.props.url, status, err.toString());
+            }.bind(this)
+        });
+    }
+
     constructor(props, context) {
-    super(props, context);
+        super(props, context);
         this.state = {data: []};
+        this.loadComments = this.loadComments.bind(this)
+        this.handleCommentSubmit = this.handleCommentSubmit.bind(this)
     }
 
     componentDidMount() {
@@ -31,8 +50,8 @@ class CommentBox extends Component {
         return (
             <div className="commentBox">
                 <h2>Comments</h2>
+                <CommentForm onCommentSubmit={this.handleCommentSubmit} />
                 <CommentList data={this.state.data}/>
-                <CommentForm />
             </div>
         )
     }
@@ -54,11 +73,43 @@ class CommentList extends Component {
 }
 
 class CommentForm extends Component {
+    constructor(props, context) {
+        super(props, context);
+        this.state = {
+            author: '',
+            text: ''
+        };
+        this.handleAuthorChange = this.handleAuthorChange.bind(this)
+        this.handleTextChange = this.handleTextChange.bind(this)
+        this.handleSubmit = this.handleSubmit(this)
+    }
+
+    handleAuthorChange(e) {
+        this.setState({author: e.target.value});
+    }
+
+    handleTextChange(e) {
+        this.setState({text: e.target.value});
+    }
+
+    handleSubmit(e) {
+        var author = this.state.author.trim();
+        var text = this.state.text.trim();
+        if (!text || !author) {
+          return;
+        }
+        // TODO: send request to the server
+        this.props.onCommentSubmit({author: author, text: text});
+        this.setState({author: '', text: ''});
+    }
+
     render() {
         return (
-            <div className="commentForm">
-            Hello, world! I am a CommentForm.
-            </div>
+            <form className="commentForm" onSubmit={this.handleSubmit}>
+                <input type="text" placeholder="Your name" value={this.state.author} onChange={this.handleAuthorChange}/>
+                <input type="text" placeholder="Say something" value={this.state.text} onChange={this.handleTextChange}/>
+                <input type="submit" value="post"/>
+            </form>
         )
     }
 }

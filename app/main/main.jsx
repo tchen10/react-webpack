@@ -13,4 +13,4 @@ var data = [
 var url = "https://react-webpack-671a5.firebaseio.com/comments.json"
 
 ReactDOM.render(<Home />, document.querySelector('#main'));
-ReactDOM.render(<CommentBox url={url} pollInterval={2000} />, document.querySelector('#commentBox'));
+ReactDOM.render(<CommentBox pollInterval={2000} />, document.querySelector('#commentBox'));
