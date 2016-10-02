@@ -36,8 +36,8 @@ const todos = (state = [], action) => {
 };
 
 const reducer = combineReducers({
-    todos: todos,
-    visibilityFilter: visibilityFilter
+    todos,
+    visibilityFilter
 });
 
 export default reducer;
