@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import reducer from './reducer';
 
-describe.only('reducer', () => {
+describe('reducer', () => {
     describe('todos', () => {
         it('has default state with empty array', () => {
             const stateBefore = Object.freeze({});

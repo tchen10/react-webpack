@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import UserStore from '../userStore/userStore.jsx';
 import $ from 'jquery';
 
 var url = "https://react-webpack-671a5.firebaseio.com/comments.json";
