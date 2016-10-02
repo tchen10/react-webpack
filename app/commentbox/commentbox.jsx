@@ -43,13 +43,13 @@ class CommentBox extends Component {
 
     componentDidMount() {
         this.loadComments();
-        setInterval(this.loadComments, this.props.pollInterval);
+        // setInterval(this.loadComments, this.props.pollInterval);
     }
 
     render() {
         return (
             <div className="commentBox">
-                <h2>Comments</h2>
+                <h2 id="commentHeader">Comments</h2>
                 <CommentForm onCommentSubmit={this.handleCommentSubmit} />
                 <CommentList data={this.state.data}/>
             </div>
@@ -93,6 +93,8 @@ class CommentForm extends Component {
     }
 
     handleSubmit(e) {
+        // Error: e.preventDefault is not a function
+        // e.preventDefault();
         var author = this.state.author.trim();
         var text = this.state.text.trim();
         if (!text || !author) {
