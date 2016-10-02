@@ -19,4 +19,37 @@ describe.only('reducer', () => {
 
         expect(reducer(stateBefore, action)).to.deep.equal(stateAfter);
     });
+
+    it('toggles todo', () => {
+        const stateBefore = Object.freeze([
+            {
+                id: 0,
+                text: 'Learn Redux',
+                completed: false
+            },
+            {
+                id: 1,
+                text: 'Go shopping',
+                completed: false
+            }
+        ]);
+        const action = {
+            type: 'TOGGLE_TODO',
+            id: 1
+        };
+        const stateAfter = Object.freeze([
+            {
+                id: 0,
+                text: 'Learn Redux',
+                completed: false
+            },
+            {
+                id: 1,
+                text: 'Go shopping',
+                completed: true
+            }
+        ]);
+
+        expect(reducer(stateBefore, action)).to.deep.equal(stateAfter);
+    });
 });
