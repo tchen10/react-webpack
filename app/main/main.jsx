@@ -6,4 +6,4 @@ import Home from '../home/home.jsx';
 import CommentBox from '../commentbox/commentbox.jsx';
 
 ReactDOM.render(<Home />, document.querySelector('#main'));
-ReactDOM.render(<CommentBox pollInterval={2000} />, document.querySelector('#commentBox'));
+// ReactDOM.render(<CommentBox pollInterval={2000} />, document.querySelector('#commentBox'));
