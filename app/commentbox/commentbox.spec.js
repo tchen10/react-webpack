@@ -10,7 +10,7 @@ import CommentForm from './commentbox';
 import CommentList from './commentbox';
 import Comment from './commentbox';
 
-describe('<CommentBox />', function() {
+describe.skip('<CommentBox />', function() {
 
     it('displays comments header', function() {
         const wrapper = shallow(<CommentBox />);
@@ -44,7 +44,7 @@ describe('<CommentBox />', function() {
     });
 });
 
-describe('<CommentList />', function() {
+describe.skip('<CommentList />', function() {
     it('has props for data', function() {
         const wrapper = shallow(<CommentList />);
         expect(wrapper.props().data).to.be.defined;
