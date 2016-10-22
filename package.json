@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "e2e-setup": "node_modules/selenium-standalone/bin/selenium-standalone install",
-    "test": "node_modules/mocha/bin/mocha -w config/jsdom.js app/**/*.spec.js",
+    "test": "node_modules/mocha/bin/mocha -w config/jsdom.js app/**/*.spec.js app/**/**/*.spec.js",
     "e2e-test": "node_modules/nightwatch/bin/nightwatch",
     "production": "node_modules/webpack/bin/webpack.js -p",
     "build": "node_modules/webpack/bin/webpack.js --config  ./config/webpack.config.js",
