@@ -25,9 +25,7 @@ class TodoApp extends Component {
                 <input ref={ node => {
                     this.input = node;
                 }} />
-                <button onClick={this.addTodo}>
-                Add Todo
-                </button>
+                <button onClick={this.addTodo}>Add Todo</button>
                 <ul>
                     {this.props.todos.map(todo =>
                         <li key={todo.id}>
