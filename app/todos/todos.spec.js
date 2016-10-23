@@ -5,9 +5,10 @@ import sinon from 'sinon';
 
 import TodoApp from './todos';
 import TodoList from './todoList';
+import AddTodo from './addTodo';
 
 describe('<TodoApp />', () => {
-    describe('default elements', () => {
+    describe('presentational elements', () => {
         let props;
         let wrapper;
 
@@ -16,16 +17,11 @@ describe('<TodoApp />', () => {
             wrapper = shallow(<TodoApp {...props}/>);
         });
 
-        it('has an input field', () => {
-            expect(wrapper.find('input')).to.have.length(1);
+        it('has an AddTodo component', ()  => {
+            expect(wrapper.find(AddTodo)).to.have.length(1);
         });
 
-        it('has a button', ()  => {
-            expect(wrapper.find('button')).to.have.length(1);
-            expect(wrapper.find('button').text()).to.equal('Add Todo');
-        });
-
-        it('has a Todo list', () => {
+        it('has a TodoList component', () => {
             expect(wrapper.find(TodoList)).to.have.length(1);
         })
     });

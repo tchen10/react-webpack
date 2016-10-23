@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import store from './store';
 
 import TodoList from './todoList.jsx';
+import AddTodo from './addTodo.jsx';
 
 
 const FilterLink = ({
@@ -42,13 +43,12 @@ const getVisibileTodos = (todos, filter) => {
 
 let nextTodoId = 0;
 class TodoApp extends Component {
-    addTodo(input) {
+    addTodo(text) {
         store.dispatch({
             type: 'ADD_TODO',
-            text: this.input.value,
+            text: text,
             id: nextTodoId++
         });
-        this.input.value = '';
     }
 
     toggleTodo(id) {
@@ -72,10 +72,7 @@ class TodoApp extends Component {
         const visibleTodos = getVisibileTodos(todos, visibilityFilter)
         return (
             <div>
-                <input ref={ node => {
-                    this.input = node;
-                }} />
-                <button onClick={this.addTodo}>Add Todo</button>
+                <AddTodo onAddClick={text => this.addTodo(text)} />
                 <TodoList
                     todos={visibleTodos}
                     onTodoClick={id => this.toggleTodo(id)}
