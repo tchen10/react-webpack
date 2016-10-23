@@ -14,6 +14,13 @@ class TodoApp extends Component {
         this.input.value = '';
     }
 
+    toggleTodo(id) {
+        return () => { store.dispatch({
+            type: 'TOGGLE_TODO',
+            id: id
+        })};
+    }
+
     constructor(props, context) {
         super(props, context);
         this.addTodo = this.addTodo.bind(this)
@@ -28,7 +35,7 @@ class TodoApp extends Component {
                 <button onClick={this.addTodo}>Add Todo</button>
                 <ul>
                     {this.props.todos.map(todo =>
-                        <li key={todo.id}>
+                        <li key={todo.id} onClick={this.toggleTodo(todo.id)} style={{textDecoration: todo.completed ? 'line-through' : 'none'}}>
                             {todo.text}
                         </li>
                     )}
