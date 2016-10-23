@@ -12,7 +12,8 @@ ReactDOM.render(<Home />, document.querySelector('#main'));
 // ReactDOM.render(<CommentBox pollInterval={2000} />, document.querySelector('#commentBox'));
 
 const render = () => {
-    ReactDOM.render(<TodoApp todos={store.getState().todos} />, document.querySelector('#todos'));
+    // passing every state field inside the state object as a prop instead of doing it explicity i.e. todos=... visibilityFilter=...
+    ReactDOM.render(<TodoApp {...store.getState()} />, document.querySelector('#todos'));
 };
 store.subscribe(render);
 render();
