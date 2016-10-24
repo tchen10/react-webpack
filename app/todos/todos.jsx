@@ -3,28 +3,7 @@ import store from './store';
 
 import TodoList from './todoList.jsx';
 import AddTodo from './addTodo.jsx';
-
-
-const FilterLink = ({
-    filter,
-    currentFilter,
-    children
-}) => {
-    if (filter === currentFilter ) {
-        return <span>{children}</span>
-    }
-    return (
-        <a href='#' onClick={e => {
-            e.preventDefault();
-            store.dispatch({
-                type: 'SET_VISIBILITY_FILTER',
-                filter
-            });
-        }}>
-            {children}
-        </a>
-    );
-};
+import Footer from './footer.jsx';
 
 const getVisibileTodos = (todos, filter) => {
     switch (filter) {
@@ -58,9 +37,15 @@ class TodoApp extends Component {
         })};
     }
 
+    filterTodo(filter) {
+        store.dispatch({
+            type: 'SET_VISIBILITY_FILTER',
+            filter: filter
+        });
+    }
+
     constructor(props, context) {
         super(props, context);
-        this.addTodo = this.addTodo.bind(this)
     }
 
     render() {
@@ -77,12 +62,7 @@ class TodoApp extends Component {
                     todos={visibleTodos}
                     onTodoClick={id => this.toggleTodo(id)}
                 />
-                <p>
-                    Show:
-                    {''} <FilterLink filter='SHOW_ALL' currentFilter={visibilityFilter}>All</FilterLink>
-                    {''} <FilterLink filter='SHOW_ACTIVE' currentFilter={visibilityFilter}>Active</FilterLink>
-                    {''} <FilterLink filter='SHOW_COMPLETED' currentFilter={visibilityFilter}>Completed</FilterLink>
-                </p>
+                <Footer visibilityFilter={visibilityFilter} onFilterClick={filter => this.filterTodo(filter)}/>
             </div>
         );
     }
